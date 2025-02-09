@@ -50,6 +50,44 @@ export const getProduct = async (req, res) => {
   }
 };
 
-export const updateProduct = async (req, res) => {};
+export const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const {name, price, image } = req.body;
 
-export const deleteProduct = async (req, res) => {};
+  try {
+     const updateProducted = await sql`
+      UPDATE products
+      SET name=${name}, price=${price}, image=${image}
+      WHERE id=${id}
+      RETURNING *
+     `
+     if (updateProducted.length === 0) {
+      return res.status(404).json({success: false, message: "Product not found"});
+     }
+
+     return res.status(200).json({success: true, data: updateProducted[0]})
+  } catch (error) {
+    console.log("Error in updateProduct", error)
+    return res.status(500).json({ success: false, message: "Internal Server error"})
+  }
+};
+
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedProduct = await sql`
+      DELETE FROM products
+      WHERE id = ${id}
+      RETURNING *
+    `
+    if (deletedProduct.length === 0) {
+      return res.status(404).json({success: false, message: "Product not found"});
+    }
+
+    return res.status(200).json({ success: true, message: "Product deleted successfully", data: deletedProduct[0]})
+  } catch (error) {
+    console.log("Error in deleteProduct");
+    
+  }
+};
