@@ -4,7 +4,7 @@
   "main": "backend/server.js",
   "type": "module",
   "scripts": {
-    "dev" : "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,8 @@
     "express": "^4.21.2",
     "helmet": "^8.0.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }
