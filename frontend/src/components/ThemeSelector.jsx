@@ -1,9 +1,12 @@
 import { PaletteIcon } from "lucide-react";
 import React from "react";
 import { THEMES } from "../constants";
+import { useThemeStore } from "../store/useThemeStore";
 
 const ThemeSelector = () => {
-  const theme = "forest";
+  const { theme, setTheme } = useThemeStore();
+
+  console.log(theme)
   return (
     <div className="dropdown dropdown-end">
       <button tabIndex={0} className="btn btn-ghost btn-circle">
@@ -17,7 +20,7 @@ const ThemeSelector = () => {
         {THEMES.map((themeOption) => (
           <button
             key={themeOption.name}
-
+            onClick={() => setTheme(themeOption.name)}
             className={`
                 w-full px-4 py-3 rounded-xl flex items-center gap-3 transition-colors
                 ${
@@ -27,7 +30,6 @@ const ThemeSelector = () => {
                 }
             `}
           >
-
             <PaletteIcon className="size-4" />
             <span className="text-sm font-medium">{themeOption.label}</span>
             {/* THEME PREVIEW COLOURS */}
