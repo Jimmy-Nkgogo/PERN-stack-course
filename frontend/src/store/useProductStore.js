@@ -56,8 +56,21 @@ export const useProductStore = create((set, get) => ({
   },
   addProduct: async (e) => {
     e.preventDefault();
+    set({ loading: true });
 
     try {
-    } catch (error) {}
+      const { formData } = get();
+      await axios.post(`${BASE_URL}/api/products`, formData);
+      await get().fetchProducts(); // this is updating the UI after adding a new product
+      get().resetForm(); // reset our form after adding a new product
+      toast.success("Product added successfully");
+
+      //TODO: close the model after creating a new product
+    } catch (error) {
+      console.log("Error in addProduct function", error);
+      toast.error("Something went wrong");
+    } finally {
+      set({ loading: false });
+    }
   },
 }));
