@@ -15,9 +15,9 @@ export const useProductStore = create((set, get) => ({
       set({ products: response.data.data, error: null }); // the first .data is coming from axios
     } catch (error) {
       if (error.status == 429) {
-        set({ error: "Rate limit exceeded" });
+        set({ error: "Rate limit exceeded", products:[] });
       } else {
-        set({ error: "Something went wrong" });
+        set({ error: "Something went wrong", products: [] });
       }
     } finally {
       set({ loading: false });
