@@ -9,6 +9,20 @@ export const useProductStore = create((set, get) => ({
   loading: false,
   error: null,
 
+  formData: {
+    name: "",
+    price: "",
+    image: "",
+  },
+  setFormData: (formData) => set({ formData }),
+  resetForm: () =>
+    set({
+      formData: {
+        name: "",
+        price: "",
+        image: "",
+      },
+    }),
   fetchProducts: async () => {
     set({ loading: true });
     try {
@@ -39,5 +53,11 @@ export const useProductStore = create((set, get) => ({
     } finally {
       set({ loading: false });
     }
+  },
+  addProduct: async (e) => {
+    e.preventDefault();
+
+    try {
+    } catch (error) {}
   },
 }));
