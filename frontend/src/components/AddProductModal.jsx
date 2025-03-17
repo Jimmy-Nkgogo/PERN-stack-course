@@ -9,10 +9,10 @@ const AddProductModal = () => {
     <dialog id="add_product_modal" className="modal">
       <div className="modal-box">
         {/* button for closing */}
-        <form className="dialog" onSubmit={(e) => {
-            e.preventDefault()
-            document.getElementById("add_product_modal").close()
-        }}>
+        <form
+          className="dialog"
+          onSubmit={(e) => document.getElementById("add_product_modal").close()}
+        >
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             X
           </button>
@@ -22,7 +22,6 @@ const AddProductModal = () => {
 
         <form onSubmit={addProduct} className="space-y-6">
           <div className="grid gap-6">
-
             {/* PRODUCT PRICE NAME */}
             <div className="form-control">
               <label className="label">
@@ -49,9 +48,7 @@ const AddProductModal = () => {
             {/* Product PRICE INPUT */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-base font-medium">
-                  Price
-                </span>
+                <span className="label-text text-base font-medium">Price</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events none text-base-content/50">
@@ -96,6 +93,10 @@ const AddProductModal = () => {
           </div>
         </form>
       </div>
+
+      <form method="dialog" className="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
   );
 };
