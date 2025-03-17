@@ -37,8 +37,11 @@ const ProductPage = () => {
     );
   }
 
-  const handleDelete = (id) => {
-    
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this product")) {
+      await deleteProduct(id);
+      navigate("/")
+    }
   }
 
   return (

@@ -90,7 +90,7 @@ export const useProductStore = create((set, get) => ({
       const response = await axios.put(`${BASE_URL}/api/products/${id}`, formData);
       set({ currentProduct: response.data.data });
       toast.success("Product updated successfully");
-
+      
     } catch (err) {
       console.log("Something went wrong in the updateProduct")
       toast.error("Something went wrong");
