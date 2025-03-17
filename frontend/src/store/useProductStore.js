@@ -71,13 +71,31 @@ export const useProductStore = create((set, get) => ({
     set({ loading: true });
     try {
       const response = await axios.get(`${BASE_URL}/api/products/${id}`);
-      set({ currentProduct: response.data.data, formData: response.data.data, error: null });
+      set({
+        currentProduct: response.data.data,
+        formData: response.data.data,
+        error: null,
+      });
     } catch (error) {
       console.log("Error in the fetchProduct function", error);
-      set({ error: "Something went wrong", currentProduct: null})
+      set({ error: "Something went wrong", currentProduct: null });
     } finally {
       set({ loading: false });
     }
   },
-  updateProduct: async () => {},
+  updateProduct: async (id) => {
+    set({ loading: true });
+    try {
+      const { formData } = get();
+      const response = await axios.put(`${BASE_URL}/products/${id}`, formData);
+      set({ currentProduct: response.data.data });
+      toast.success("Product updated successfully");
+
+    } catch (err) {
+      console.log("Something went wrong in the updateProduct")
+      toast.error("Something went wrong");
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));
