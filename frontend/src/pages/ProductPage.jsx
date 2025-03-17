@@ -51,8 +51,8 @@ const ProductPage = () => {
         {/* PRODUCT IMAGE */}
         <div className="rounded-lg overflow-hidden shadow-lg bg-base-100">
           <img
-            src={currentProduct.image}
-            alt={currentProduct.name}
+            src={currentProduct?.image}
+            alt={currentProduct?.name}
             className="size-full object-cover"
           />
         </div>
@@ -100,6 +100,7 @@ const ProductPage = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, price: e.target.value })
                   }
+                  className="input input-bordered w-full"
                 />
               </div>
 
