@@ -66,6 +66,7 @@ export const useProductStore = create((set, get) => ({
       toast.success("Product added successfully");
 
       //TODO: close the model after creating a new product
+      document.getElementById("add_product_modal").close()
     } catch (error) {
       console.log("Error in addProduct function", error);
       toast.error("Something went wrong");
