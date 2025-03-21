@@ -17,7 +17,9 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cors("http"));
-app.use(helmet()); // this helps with security by setting various HTTP headers
+app.use(helmet({
+  contentSecurityPolicy: false, // so that our images will display
+})); // this helps with security by setting various HTTP headers
 app.use(morgan("dev")); // log the requests
 
 app.use(async (req, res, next) => {
