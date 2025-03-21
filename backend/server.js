@@ -48,7 +48,6 @@ app.use(async (req, res, next) => {
     }
     next();
   } catch (error) {
-    console.log("Arcjet error", error);
     next(error);
   }
 });
@@ -75,14 +74,11 @@ async function initDB() {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`;
 
-    console.log("Database initialized successfully");
   } catch (error) {
-    console.log("Error initDB", error);
   }
 }
 
 initDB().then(
   app.listen(PORT, () => {
-    console.log("Server is running on port " + PORT);
   })
 );

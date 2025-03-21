@@ -3,7 +3,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 // base url is now dynamic depending on the environment
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : ""
+const BASE_URL =
+  import.meta.env.MODE === "development" ? "http://localhost:3000" : "";
 
 export const useProductStore = create((set, get) => ({
   products: [],
@@ -43,7 +44,6 @@ export const useProductStore = create((set, get) => ({
       }));
       toast.success("Product deleted successfully");
     } catch (error) {
-      console.log("error in deleteProduct function", error);
       toast.error("Something went wrong");
     } finally {
       set({ loading: false });
@@ -62,7 +62,6 @@ export const useProductStore = create((set, get) => ({
 
       document.getElementById("add_product_modal").close();
     } catch (error) {
-      console.log("Error in addProduct function", error);
       toast.error("Something went wrong");
     } finally {
       set({ loading: false });
@@ -78,7 +77,6 @@ export const useProductStore = create((set, get) => ({
         error: null,
       });
     } catch (error) {
-      console.log("Error in the fetchProduct function", error);
       set({ error: "Something went wrong", currentProduct: null });
     } finally {
       set({ loading: false });
@@ -88,12 +86,13 @@ export const useProductStore = create((set, get) => ({
     set({ loading: true });
     try {
       const { formData } = get();
-      const response = await axios.put(`${BASE_URL}/api/products/${id}`, formData);
+      const response = await axios.put(
+        `${BASE_URL}/api/products/${id}`,
+        formData
+      );
       set({ currentProduct: response.data.data });
       toast.success("Product updated successfully");
-      
     } catch (err) {
-      console.log("Something went wrong in the updateProduct")
       toast.error("Something went wrong");
     } finally {
       set({ loading: false });

@@ -5,9 +5,7 @@ export const getAllProducts = async (req, res) => {
     const products = await sql`SELECT * FROM products ORDER BY created_at DESC`;
 
     res.status(200).json({ success: true, data: products });
-    console.log("Fetched products", products);
   } catch (error) {
-    console.log("Error in getAllProducts", error);
     return res
       .status(500)
       .json({ success: false, message: "Something went wrong." });
@@ -26,10 +24,8 @@ export const createProduct = async (req, res) => {
     RETURNING *
     `;
 
-    console.log("new product added: ", newProduct);
     return res.status(201).json({ success: true, data: newProduct[0] });
   } catch (error) {
-    console.log("Error in createProduct", error);
     return res
       .status(400)
       .json({ success: false, message: "Something went wrong" });
@@ -45,7 +41,6 @@ export const getProduct = async (req, res) => {
     `;
     return res.status(200).json({ success: true, data: product[0] });
   } catch (error) {
-    console.log("Error in getProduct function", error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
@@ -69,7 +64,6 @@ export const updateProduct = async (req, res) => {
 
     return res.status(200).json({ success: true, data: updateProducted[0] });
   } catch (error) {
-    console.log("Error in updateProduct", error);
     return res
       .status(500)
       .json({ success: false, message: "Internal Server error" });
@@ -99,7 +93,6 @@ export const deleteProduct = async (req, res) => {
         data: deletedProduct[0],
       });
   } catch (error) {
-    console.log("Error in deleteProduct", error);
     return res
       .status(500)
       .json({ success: false, message: "Internal Server Error" });
